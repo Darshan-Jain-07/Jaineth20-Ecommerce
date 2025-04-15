@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 
 dotenv.config(); // Load environment variables
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 // Use CORS middleware before defining routes
 app.use(cors());
