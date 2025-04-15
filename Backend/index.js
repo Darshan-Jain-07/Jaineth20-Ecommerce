@@ -6,7 +6,9 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const dotenv = require("dotenv");
-
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 dotenv.config(); // Load environment variables
 
 const port = process.env.PORT || 4000;
@@ -234,15 +236,15 @@ app.post("/getcart", fetchuser, async (req, res) => {
 app.post("/addproduct", async (req, res) => {
   let products = await Product.find({});
   let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
-
+  console.log(req.body);
   const product = new Product({
     id: id,
-    name: req.body.name,
-    description: req.body.description,
-    image: req.body.image,
-    category: req.body.category,
-    new_price: req.body.new_price,
-    old_price: req.body.old_price,
+    name: req.body?.name,
+    description: req.body?.description,
+    image: req.body?.image,
+    category: req.body?.category,
+    new_price: req.body?.new_price,
+    old_price: req.body?.old_price,
   });
 
   await product.save();
